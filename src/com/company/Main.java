@@ -17,6 +17,7 @@ public class Main {
         int p;
         int i;
         int temp;
+        int mid;
         //log("left is "+l+" and r is "+r);
 
 
@@ -28,9 +29,42 @@ public class Main {
                     p = args[l];
                     break;
                 case "last":
-                    p = args[r-1];
-                    args[r-1]=args[l];
-                    args[l]=p;
+                    p = args[r - 1];
+                    args[r - 1] = args[l];
+                    args[l] = p;
+                    break;
+                case "mot":
+                    //find the middle
+                    if (((r - l) & 1) == 0) {
+                        mid = l + ((r - l) / 2);
+                    } else {
+                        mid = l + (r - l - 1) / 2;
+                    }
+                    if (args[l] > args[mid]) {
+                        if (args[mid] > args[r-1]) {
+                            p=args[mid];
+                            args[mid]=args[l];
+                            args[l]=p;
+                        } else if (args[l] > args[r-1]) {
+                            p=args[r-1];
+                            args[r-1]=args[l];
+                            args[l]=p;
+                        } else {
+                            p=args[l];
+                        }
+                    } else {
+                        if (args[l] > args[r-1]) {
+                            p=args[l];
+                        } else if (args[mid] > args[r-1]) {
+                            p=args[r-1];
+                            args[r-1]=args[l];
+                            args[l]=p;
+                        } else {
+                            p=args[mid];
+                            args[mid]=args[l];
+                            args[l]=p;
+                        }
+                    }
                     break;
                 default:
                     p = args[l];
@@ -124,6 +158,7 @@ public class Main {
         log("");
         */
 
+        /*
         testcase = new int[]{3, 8, 2, 5, 1, 4, 7, 6};
         testcase2 = new int[]{2, 1};
         testcase3 = new int[]{1};
@@ -170,7 +205,54 @@ public class Main {
         log("After partition: " + Arrays.toString(testcaseforum2));
         log("Comparisons, pivot on the last element: " + Main.countcomparison);
         log("");
+        */
 
+        testcase = new int[]{3, 8, 2, 5, 1, 4, 7, 6};
+        testcase2 = new int[]{2, 1};
+        testcase3 = new int[]{1};
+        testcaseforum = new int[]{7, 5, 1, 4, 8, 3, 10, 2, 6, 9};
+        testcaseforum2 = new int[]{8, 10, 1, 9, 7, 2, 6, 3, 5, 4};
+
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array");
+        System.out.println("Before Partition: " + Arrays.toString(testcase));
+        partition(testcase, "mot", 0, testcase.length);
+        log("After partition: " + Arrays.toString(testcase));
+        log("Comparisons, pivot on the mot element: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array of length = 2");
+        System.out.println("Before Partition: " + Arrays.toString(testcase2));
+        partition(testcase2, "mot", 0, testcase2.length);
+        log("After partition: " + Arrays.toString(testcase2));
+        log("Comparisons, pivot on the mot element: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array of length = 1");
+        System.out.println("Before Partition: " + Arrays.toString(testcase3));
+        partition(testcase3, "mot", 0, testcase3.length);
+        log("After partition: " + Arrays.toString(testcase3));
+        log("Comparisons, pivot on the mot element: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array from forum");
+        System.out.println("Before Partition: " + Arrays.toString(testcaseforum));
+        partition(testcaseforum, "mot", 0, testcaseforum.length);
+        log("After partition: " + Arrays.toString(testcaseforum));
+        log("Pivot on mot element comparisons: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array from forum");
+        System.out.println("Before Partition: " + Arrays.toString(testcaseforum2));
+        partition(testcaseforum2, "mot", 0, testcaseforum2.length);
+        log("After partition: " + Arrays.toString(testcaseforum2));
+        log("Comparisons, pivot on the mot element: " + Main.countcomparison);
+        log("");
 
 
 
