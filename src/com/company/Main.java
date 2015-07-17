@@ -13,41 +13,50 @@ public class Main {
         System.out.println(args.toString());
     }
 
-    public static void partition(int[] args, String choose,int l,int r) {
+    public static void partition(int[] args, String choose, int l, int r) {
         int p;
         int i;
         int temp;
         //log("left is "+l+" and r is "+r);
-        switch (choose) {
-            case "first":
-                if (r-l > 1) {
-                    //log("Partition called, not base case.");
-                    Main.countcomparison += r-l-1;
+
+
+        if (r - l > 1) {
+            //log("Partition called, not base case.");
+            Main.countcomparison += r - l - 1;
+            switch (choose) {
+                case "first":
                     p = args[l];
-                    i = l+1;
-                    for (int j = i; j < r; j++) {
-                        if (args[j] < p) {
-                            temp = args[j];
-                            args[j] = args[i];
-                            args[i] = temp;
-                            i++;
-                        }
-                    }
-                    temp = args[i - 1];
-                    args[i - 1] = args[l];
-                    args[l] = temp;
-
-                    log("The index i is "+i+", l is "+l+" and r is "+r+".");
-                    System.out.println(Arrays.toString(args));
-                    //Partition on the left
-                    partition(args, "first", l, i - 1);
-                    //Partition on the right
-                    partition(args ,"first", i, r);
-
+                    break;
+                case "last":
+                    p = args[r-1];
+                    args[r-1]=args[l];
+                    args[l]=p;
+                    break;
+                default:
+                    p = args[l];
+                    break;
+            }
+            i = l + 1;
+            for (int j = i; j < r; j++) {
+                if (args[j] < p) {
+                    temp = args[j];
+                    args[j] = args[i];
+                    args[i] = temp;
+                    i++;
                 }
-                break;
+            }
+            temp = args[i - 1];
+            args[i - 1] = args[l];
+            args[l] = temp;
+
+            //log("The index i is " + i + ", l is " + l + " and r is " + r + ".");
+            //System.out.println(Arrays.toString(args));
+            //Partition on the left
+            partition(args, "first", l, i - 1);
+            //Partition on the right
+            partition(args, "first", i, r);
         }
-        //return args;
+
     }
 
     public static void main(String[] args) {
@@ -73,12 +82,13 @@ public class Main {
         median element, 19
         */
 
+        /*
         Main.countcomparison = 0;
         log("Testing Partition on an array");
         System.out.println("Before Partition: " + Arrays.toString(testcase));
         partition(testcase, "first", 0, testcase.length);
         log("After partition: " + Arrays.toString(testcase));
-        log("Comparisons, pivot on the first element: "+Main.countcomparison);
+        log("Comparisons, pivot on the first element: " + Main.countcomparison);
         log("");
 
         Main.countcomparison = 0;
@@ -86,7 +96,7 @@ public class Main {
         System.out.println("Before Partition: " + Arrays.toString(testcase2));
         partition(testcase2, "first", 0, testcase2.length);
         log("After partition: " + Arrays.toString(testcase2));
-        log("Comparisons, pivot on the first element: "+Main.countcomparison);
+        log("Comparisons, pivot on the first element: " + Main.countcomparison);
         log("");
 
         Main.countcomparison = 0;
@@ -94,7 +104,7 @@ public class Main {
         System.out.println("Before Partition: " + Arrays.toString(testcase3));
         partition(testcase3, "first", 0, testcase3.length);
         log("After partition: " + Arrays.toString(testcase3));
-        log("Comparisons, pivot on the first element: "+Main.countcomparison);
+        log("Comparisons, pivot on the first element: " + Main.countcomparison);
         log("");
 
         Main.countcomparison = 0;
@@ -102,7 +112,7 @@ public class Main {
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum));
         partition(testcaseforum, "first", 0, testcaseforum.length);
         log("After partition: " + Arrays.toString(testcaseforum));
-        log("Pivot on first element comparisons: "+Main.countcomparison);
+        log("Pivot on first element comparisons: " + Main.countcomparison);
         log("");
 
         Main.countcomparison = 0;
@@ -110,8 +120,59 @@ public class Main {
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum2));
         partition(testcaseforum2, "first", 0, testcaseforum2.length);
         log("After partition: " + Arrays.toString(testcaseforum2));
-        log("Comparisons, pivot on the first element: "+Main.countcomparison);
+        log("Comparisons, pivot on the first element: " + Main.countcomparison);
         log("");
+        */
+
+        testcase = new int[]{3, 8, 2, 5, 1, 4, 7, 6};
+        testcase2 = new int[]{2, 1};
+        testcase3 = new int[]{1};
+        testcaseforum = new int[]{7, 5, 1, 4, 8, 3, 10, 2, 6, 9};
+        testcaseforum2 = new int[]{8, 10, 1, 9, 7, 2, 6, 3, 5, 4};
+
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array");
+        System.out.println("Before Partition: " + Arrays.toString(testcase));
+        partition(testcase, "last", 0, testcase.length);
+        log("After partition: " + Arrays.toString(testcase));
+        log("Comparisons, pivot on the last element: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array of length = 2");
+        System.out.println("Before Partition: " + Arrays.toString(testcase2));
+        partition(testcase2, "last", 0, testcase2.length);
+        log("After partition: " + Arrays.toString(testcase2));
+        log("Comparisons, pivot on the last element: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array of length = 1");
+        System.out.println("Before Partition: " + Arrays.toString(testcase3));
+        partition(testcase3, "last", 0, testcase3.length);
+        log("After partition: " + Arrays.toString(testcase3));
+        log("Comparisons, pivot on the last element: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array from forum");
+        System.out.println("Before Partition: " + Arrays.toString(testcaseforum));
+        partition(testcaseforum, "last", 0, testcaseforum.length);
+        log("After partition: " + Arrays.toString(testcaseforum));
+        log("Pivot on last element comparisons: " + Main.countcomparison);
+        log("");
+
+        Main.countcomparison = 0;
+        log("Testing Partition on an array from forum");
+        System.out.println("Before Partition: " + Arrays.toString(testcaseforum2));
+        partition(testcaseforum2, "last", 0, testcaseforum2.length);
+        log("After partition: " + Arrays.toString(testcaseforum2));
+        log("Comparisons, pivot on the last element: " + Main.countcomparison);
+        log("");
+
+
+
 
         /*
         Main.countcomparison = 0;
