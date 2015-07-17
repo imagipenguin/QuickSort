@@ -253,7 +253,7 @@ public class Main {
         log("");
         */
 
-        /*
+
         Main.countcomparison = 0;
         Main.counteach = 0;
         log("Testing Partition on an array from forum");
@@ -273,11 +273,11 @@ public class Main {
         log("Comparisons, pivot on the mot element: " + Main.countcomparison);
         log("Comparisons, brute force: " + Main.counteach);
         log("");
-        */
 
 
 
 
+        /*
         Main.countcomparison = 0;
         Main.counteach = 0;
         int[] arr = data();
@@ -288,6 +288,7 @@ public class Main {
         log("Comparisons, pivot on the ? element: " + Main.countcomparison);
         log("Comparisons, brute force: " + Main.counteach);
         log("");
+        */
 
 
         //Now With Coverage?
