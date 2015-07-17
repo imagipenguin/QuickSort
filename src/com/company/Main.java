@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class Main {
 
     public static long countcomparison = 0;
+    public static long counteach = 0;
 
     public static void log(Object args) {
         System.out.println(args.toString());
@@ -36,33 +37,33 @@ public class Main {
                 case "mot":
                     //find the middle
                     if (((r - l) & 1) == 0) {
-                        mid = l + ((r - l) / 2);
+                        mid = l + ((r-l)/2) - 1;
                     } else {
-                        mid = l + (r - l - 1) / 2;
+                        mid = l + (r - l - 1)/2;
                     }
                     if (args[l] > args[mid]) {
-                        if (args[mid] > args[r-1]) {
-                            p=args[mid];
-                            args[mid]=args[l];
-                            args[l]=p;
-                        } else if (args[l] > args[r-1]) {
-                            p=args[r-1];
-                            args[r-1]=args[l];
-                            args[l]=p;
+                        if (args[mid] > args[r - 1]) {
+                            p = args[mid];
+                            args[mid] = args[l];
+                            args[l] = p;
+                        } else if (args[l] > args[r - 1]) {
+                            p = args[r - 1];
+                            args[r - 1] = args[l];
+                            args[l] = p;
                         } else {
-                            p=args[l];
+                            p = args[l];
                         }
                     } else {
-                        if (args[l] > args[r-1]) {
-                            p=args[l];
-                        } else if (args[mid] > args[r-1]) {
-                            p=args[r-1];
-                            args[r-1]=args[l];
-                            args[l]=p;
+                        if (args[l] > args[r - 1]) {
+                            p = args[l];
+                        } else if (args[mid] > args[r - 1]) {
+                            p = args[r - 1];
+                            args[r - 1] = args[l];
+                            args[l] = p;
                         } else {
-                            p=args[mid];
-                            args[mid]=args[l];
-                            args[l]=p;
+                            p = args[mid];
+                            args[mid] = args[l];
+                            args[l] = p;
                         }
                     }
                     break;
@@ -72,6 +73,7 @@ public class Main {
             }
             i = l + 1;
             for (int j = i; j < r; j++) {
+                counteach++;
                 if (args[j] < p) {
                     temp = args[j];
                     args[j] = args[i];
@@ -86,9 +88,9 @@ public class Main {
             //log("The index i is " + i + ", l is " + l + " and r is " + r + ".");
             //System.out.println(Arrays.toString(args));
             //Partition on the left
-            partition(args, "first", l, i - 1);
+            partition(args, choose, l, i - 1);
             //Partition on the right
-            partition(args, "first", i, r);
+            partition(args, choose, i, r);
         }
 
     }
@@ -140,32 +142,38 @@ public class Main {
         log("After partition: " + Arrays.toString(testcase3));
         log("Comparisons, pivot on the first element: " + Main.countcomparison);
         log("");
+        */
 
+        /*
+        Main.counteach = 0;
         Main.countcomparison = 0;
         log("Testing Partition on an array from forum");
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum));
         partition(testcaseforum, "first", 0, testcaseforum.length);
         log("After partition: " + Arrays.toString(testcaseforum));
         log("Pivot on first element comparisons: " + Main.countcomparison);
+        log("Comparisons, brute force: " + Main.counteach);
         log("");
 
+        Main.counteach = 0;
         Main.countcomparison = 0;
         log("Testing Partition on an array from forum");
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum2));
         partition(testcaseforum2, "first", 0, testcaseforum2.length);
         log("After partition: " + Arrays.toString(testcaseforum2));
         log("Comparisons, pivot on the first element: " + Main.countcomparison);
+        log("Comparisons, brute force: " + Main.counteach);
         log("");
         */
 
-        /*
+
         testcase = new int[]{3, 8, 2, 5, 1, 4, 7, 6};
         testcase2 = new int[]{2, 1};
         testcase3 = new int[]{1};
         testcaseforum = new int[]{7, 5, 1, 4, 8, 3, 10, 2, 6, 9};
         testcaseforum2 = new int[]{8, 10, 1, 9, 7, 2, 6, 3, 5, 4};
 
-
+        /*
         Main.countcomparison = 0;
         log("Testing Partition on an array");
         System.out.println("Before Partition: " + Arrays.toString(testcase));
@@ -189,21 +197,27 @@ public class Main {
         log("After partition: " + Arrays.toString(testcase3));
         log("Comparisons, pivot on the last element: " + Main.countcomparison);
         log("");
+        */
 
+        /*
         Main.countcomparison = 0;
+        Main.counteach = 0;
         log("Testing Partition on an array from forum");
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum));
         partition(testcaseforum, "last", 0, testcaseforum.length);
         log("After partition: " + Arrays.toString(testcaseforum));
         log("Pivot on last element comparisons: " + Main.countcomparison);
+        log("Comparisons, brute force: " + Main.counteach);
         log("");
 
         Main.countcomparison = 0;
+        Main.counteach = 0;
         log("Testing Partition on an array from forum");
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum2));
         partition(testcaseforum2, "last", 0, testcaseforum2.length);
         log("After partition: " + Arrays.toString(testcaseforum2));
         log("Comparisons, pivot on the last element: " + Main.countcomparison);
+        log("Comparisons, brute force: " + Main.counteach);
         log("");
         */
 
@@ -213,7 +227,7 @@ public class Main {
         testcaseforum = new int[]{7, 5, 1, 4, 8, 3, 10, 2, 6, 9};
         testcaseforum2 = new int[]{8, 10, 1, 9, 7, 2, 6, 3, 5, 4};
 
-
+        /*
         Main.countcomparison = 0;
         log("Testing Partition on an array");
         System.out.println("Before Partition: " + Arrays.toString(testcase));
@@ -237,32 +251,44 @@ public class Main {
         log("After partition: " + Arrays.toString(testcase3));
         log("Comparisons, pivot on the mot element: " + Main.countcomparison);
         log("");
+        */
 
+        /*
         Main.countcomparison = 0;
+        Main.counteach = 0;
         log("Testing Partition on an array from forum");
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum));
         partition(testcaseforum, "mot", 0, testcaseforum.length);
         log("After partition: " + Arrays.toString(testcaseforum));
-        log("Pivot on mot element comparisons: " + Main.countcomparison);
+        log("Comparisons, pivot on mot element: " + Main.countcomparison);
+        log("Comparisons, brute force: " + Main.counteach);
         log("");
 
         Main.countcomparison = 0;
+        Main.counteach = 0;
         log("Testing Partition on an array from forum");
         System.out.println("Before Partition: " + Arrays.toString(testcaseforum2));
         partition(testcaseforum2, "mot", 0, testcaseforum2.length);
         log("After partition: " + Arrays.toString(testcaseforum2));
         log("Comparisons, pivot on the mot element: " + Main.countcomparison);
-        log("");
-
-
-
-        /*
-        Main.countcomparison = 0;
-        int[] arr = data();
-        System.out.println(Arrays.toString(arr));
-        log("Comparisons, pivot on the first element: "+Main.countcomparison);
+        log("Comparisons, brute force: " + Main.counteach);
         log("");
         */
+
+
+
+
+        Main.countcomparison = 0;
+        Main.counteach = 0;
+        int[] arr = data();
+        log("Before sort:");
+        System.out.println(Arrays.toString(arr));
+        partition(arr, "first", 0, arr.length);
+        System.out.println(Arrays.toString(arr));
+        log("Comparisons, pivot on the ? element: " + Main.countcomparison);
+        log("Comparisons, brute force: " + Main.counteach);
+        log("");
+
 
 
         log("End of Code");
